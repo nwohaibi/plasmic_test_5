@@ -55,24 +55,7 @@ import {
   useGlobalActions
 } from "@plasmicapp/react-web/lib/host";
 
-import {
-  executePlasmicDataOp,
-  usePlasmicDataOp,
-  usePlasmicInvalidate
-} from "@plasmicapp/react-web/lib/data-sources";
-
-import { FormWrapper } from "@plasmicpkgs/antd5/skinny/Form";
-import { formHelpers as FormWrapper_Helpers } from "@plasmicpkgs/antd5/skinny/Form";
-import { FormItemWrapper } from "@plasmicpkgs/antd5/skinny/FormItem";
-import { AntdInput } from "@plasmicpkgs/antd5/skinny/registerInput";
-import { inputHelpers as AntdInput_Helpers } from "@plasmicpkgs/antd5/skinny/registerInput";
-import { AntdTextArea } from "@plasmicpkgs/antd5/skinny/registerInput";
-import { inputHelpers as AntdTextArea_Helpers } from "@plasmicpkgs/antd5/skinny/registerInput";
-import { AntdButton } from "@plasmicpkgs/antd5/skinny/registerButton";
 import { DataFetcher } from "@plasmicpkgs/plasmic-query";
-import { Fetcher } from "@plasmicapp/react-web/lib/data-sources";
-
-import { useScreenVariants as useScreenVariants_2XbYkeaOlq } from "./PlasmicGlobalVariant__Screen"; // plasmic-import: 2xb--YkeaOLQ/globalVariant
 
 import "@plasmicapp/react-web/lib/plasmic.css";
 
@@ -94,13 +77,7 @@ export const PlasmicHomepage__ArgProps = new Array<ArgPropType>();
 
 export type PlasmicHomepage__OverridesType = {
   root?: Flex__<"div">;
-  section?: Flex__<"section">;
-  h1?: Flex__<"h1">;
-  form?: Flex__<typeof FormWrapper>;
-  input?: Flex__<typeof AntdInput>;
-  textArea?: Flex__<typeof AntdTextArea>;
-  button?: Flex__<typeof AntdButton>;
-  httpRestApiFetcher?: Flex__<typeof DataFetcher>;
+  jsontest?: Flex__<typeof DataFetcher>;
 };
 
 export interface DefaultHomepageProps {
@@ -130,61 +107,6 @@ function PlasmicHomepage__RenderFunc(props: {
 
   const currentUser = useCurrentUser?.() || {};
 
-  let [$queries, setDollarQueries] = React.useState<
-    Record<string, ReturnType<typeof usePlasmicDataOp>>
-  >({});
-  const stateSpecs: Parameters<typeof useDollarState>[0] = React.useMemo(
-    () => [
-      {
-        path: "form.value",
-        type: "private",
-        variableType: "object",
-        initFunc: ({ $props, $state, $queries, $ctx }) => undefined,
-
-        refName: "form",
-        onMutate: generateOnMutateForSpec("value", FormWrapper_Helpers)
-      },
-      {
-        path: "form.isSubmitting",
-        type: "private",
-        variableType: "boolean",
-        initFunc: ({ $props, $state, $queries, $ctx }) => false,
-
-        refName: "form",
-        onMutate: generateOnMutateForSpec("isSubmitting", FormWrapper_Helpers)
-      }
-    ],
-    [$props, $ctx, $refs]
-  );
-  const $state = useDollarState(stateSpecs, {
-    $props,
-    $ctx,
-    $queries: $queries,
-    $refs
-  });
-
-  const new$Queries: Record<string, ReturnType<typeof usePlasmicDataOp>> = {
-    query: usePlasmicDataOp(() => {
-      return {
-        sourceId: "iwDc8nNenfcpFRX4XEJibq",
-        opId: "fe37352d-e496-4684-a4a5-8e26b02279ea",
-        userArgs: {},
-        cacheKey: `plasmic.$.fe37352d-e496-4684-a4a5-8e26b02279ea.$.`,
-        invalidatedKeys: null,
-        roleId: null
-      };
-    })
-  };
-  if (Object.keys(new$Queries).some(k => new$Queries[k] !== $queries[k])) {
-    setDollarQueries(new$Queries);
-
-    $queries = new$Queries;
-  }
-
-  const globalVariants = ensureGlobalVariants({
-    screen: useScreenVariants_2XbYkeaOlq()
-  });
-
   return (
     <React.Fragment>
       <div className={projectcss.plasmic_page_wrapper}>
@@ -204,138 +126,10 @@ function PlasmicHomepage__RenderFunc(props: {
             sty.root
           )}
         >
-          <section
-            data-plasmic-name={"section"}
-            data-plasmic-override={overrides.section}
-            className={classNames(projectcss.all, sty.section)}
-          >
-            <h1
-              data-plasmic-name={"h1"}
-              data-plasmic-override={overrides.h1}
-              className={classNames(
-                projectcss.all,
-                projectcss.h1,
-                projectcss.__wab_text,
-                sty.h1
-              )}
-            >
-              {hasVariant(globalVariants, "screen", "mobileOnly") ? "c" : "c"}
-            </h1>
-            <div
-              className={classNames(
-                projectcss.all,
-                projectcss.__wab_text,
-                sty.text__s45K2
-              )}
-            >
-              <React.Fragment>
-                <React.Fragment>
-                  {
-                    "If you haven't already done so, go back and learn the basics by going through the Plasmic Levels tutorial.\n\nIt's always easier to start from examples! Add a new page using a template\u2014do this from the list of pages in the top toolbar.\n\nOr press the big blue + button to start inserting items into this page.\n\nIntegrate this project into your codebase\u2014press the "
-                  }
-                </React.Fragment>
-                <span
-                  className={"plasmic_default__all plasmic_default__span"}
-                  style={{ fontWeight: 700 }}
-                >
-                  {"Code"}
-                </span>
-                <React.Fragment>
-                  {
-                    " button in the top right and follow the quickstart instructions.\n\nJoin our Slack community (icon in bottom left) for help any time."
-                  }
-                </React.Fragment>
-              </React.Fragment>
-            </div>
-          </section>
-          {(() => {
-            const child$Props = {
-              className: classNames("__wab_instance", sty.form),
-              extendedOnValuesChange:
-                generateStateOnChangePropForCodeComponents(
-                  $state,
-                  "value",
-                  ["form", "value"],
-                  FormWrapper_Helpers
-                ),
-              formItems: undefined,
-              labelCol: { span: 8, horizontalOnly: true },
-              layout: "vertical",
-              mode: undefined,
-              onIsSubmittingChange: generateStateOnChangePropForCodeComponents(
-                $state,
-                "isSubmitting",
-                ["form", "isSubmitting"],
-                FormWrapper_Helpers
-              ),
-              ref: ref => {
-                $refs["form"] = ref;
-              },
-              wrapperCol: { span: 16, horizontalOnly: true }
-            };
-            initializeCodeComponentStates(
-              $state,
-              [
-                {
-                  name: "value",
-                  plasmicStateName: "form.value"
-                },
-                {
-                  name: "isSubmitting",
-                  plasmicStateName: "form.isSubmitting"
-                }
-              ],
-              [],
-              FormWrapper_Helpers ?? {},
-              child$Props
-            );
-
-            return (
-              <FormWrapper
-                data-plasmic-name={"form"}
-                data-plasmic-override={overrides.form}
-                {...child$Props}
-              >
-                <FormItemWrapper
-                  className={classNames("__wab_instance", sty.formField__qaMfx)}
-                  label={"Name"}
-                  name={"name"}
-                >
-                  <AntdInput
-                    className={classNames("__wab_instance", sty.input)}
-                  />
-                </FormItemWrapper>
-                <FormItemWrapper
-                  className={classNames("__wab_instance", sty.formField__bwd37)}
-                  label={"Message"}
-                  name={"message"}
-                >
-                  <AntdTextArea
-                    className={classNames("__wab_instance", sty.textArea)}
-                  />
-                </FormItemWrapper>
-                <AntdButton
-                  className={classNames("__wab_instance", sty.button)}
-                  submitsForm={"boolean"}
-                  type={"primary"}
-                >
-                  <div
-                    className={classNames(
-                      projectcss.all,
-                      projectcss.__wab_text,
-                      sty.text__cyeq4
-                    )}
-                  >
-                    {"Button"}
-                  </div>
-                </AntdButton>
-              </FormWrapper>
-            );
-          })()}
           <DataFetcher
-            data-plasmic-name={"httpRestApiFetcher"}
-            data-plasmic-override={overrides.httpRestApiFetcher}
-            className={classNames("__wab_instance", sty.httpRestApiFetcher)}
+            data-plasmic-name={"jsontest"}
+            data-plasmic-override={overrides.jsontest}
+            className={classNames("__wab_instance", sty.jsontest)}
             dataName={"fetchedData"}
             errorDisplay={
               <DataCtxReader__>{$ctx => "Error fetching data"}</DataCtxReader__>
@@ -352,9 +146,7 @@ function PlasmicHomepage__RenderFunc(props: {
             noLayout={false}
             previewErrorDisplay={true}
             previewSpinner={true}
-            url={
-              "http://65.21.139.175/jg.php?get_nodes_by_query=1&active=1&offset=0&count=1&"
-            }
+            url={"http://aldalal.com/jg.php?get_regions=1"}
           />
         </div>
       </div>
@@ -363,36 +155,15 @@ function PlasmicHomepage__RenderFunc(props: {
 }
 
 const PlasmicDescendants = {
-  root: [
-    "root",
-    "section",
-    "h1",
-    "form",
-    "input",
-    "textArea",
-    "button",
-    "httpRestApiFetcher"
-  ],
-  section: ["section", "h1"],
-  h1: ["h1"],
-  form: ["form", "input", "textArea", "button"],
-  input: ["input"],
-  textArea: ["textArea"],
-  button: ["button"],
-  httpRestApiFetcher: ["httpRestApiFetcher"]
+  root: ["root", "jsontest"],
+  jsontest: ["jsontest"]
 } as const;
 type NodeNameType = keyof typeof PlasmicDescendants;
 type DescendantsType<T extends NodeNameType> =
   (typeof PlasmicDescendants)[T][number];
 type NodeDefaultElementType = {
   root: "div";
-  section: "section";
-  h1: "h1";
-  form: typeof FormWrapper;
-  input: typeof AntdInput;
-  textArea: typeof AntdTextArea;
-  button: typeof AntdButton;
-  httpRestApiFetcher: typeof DataFetcher;
+  jsontest: typeof DataFetcher;
 };
 
 type ReservedPropsType = "variants" | "args" | "overrides";
@@ -455,13 +226,7 @@ export const PlasmicHomepage = Object.assign(
   makeNodeComponent("root"),
   {
     // Helper components rendering sub-elements
-    section: makeNodeComponent("section"),
-    h1: makeNodeComponent("h1"),
-    form: makeNodeComponent("form"),
-    input: makeNodeComponent("input"),
-    textArea: makeNodeComponent("textArea"),
-    button: makeNodeComponent("button"),
-    httpRestApiFetcher: makeNodeComponent("httpRestApiFetcher"),
+    jsontest: makeNodeComponent("jsontest"),
 
     // Metadata about props expected for PlasmicHomepage
     internalVariantProps: PlasmicHomepage__VariantProps,
