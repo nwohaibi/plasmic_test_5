@@ -69,7 +69,6 @@ import { inputHelpers as AntdInput_Helpers } from "@plasmicpkgs/antd5/skinny/reg
 import { AntdTextArea } from "@plasmicpkgs/antd5/skinny/registerInput";
 import { inputHelpers as AntdTextArea_Helpers } from "@plasmicpkgs/antd5/skinny/registerInput";
 import { AntdButton } from "@plasmicpkgs/antd5/skinny/registerButton";
-import { RichList } from "@plasmicpkgs/plasmic-rich-components/skinny/rich-list";
 import { DataFetcher } from "@plasmicpkgs/plasmic-query";
 import { Fetcher } from "@plasmicapp/react-web/lib/data-sources";
 
@@ -101,8 +100,7 @@ export type PlasmicHomepage__OverridesType = {
   input?: Flex__<typeof AntdInput>;
   textArea?: Flex__<typeof AntdTextArea>;
   button?: Flex__<typeof AntdButton>;
-  dataList?: Flex__<typeof RichList>;
-  dataFetcher?: Flex__<typeof Fetcher>;
+  httpRestApiFetcher?: Flex__<typeof DataFetcher>;
 };
 
 export interface DefaultHomepageProps {
@@ -299,7 +297,7 @@ function PlasmicHomepage__RenderFunc(props: {
                 {...child$Props}
               >
                 <FormItemWrapper
-                  className={classNames("__wab_instance", sty.formField__lw5Cv)}
+                  className={classNames("__wab_instance", sty.formField__qaMfx)}
                   label={"Name"}
                   name={"name"}
                 >
@@ -308,7 +306,7 @@ function PlasmicHomepage__RenderFunc(props: {
                   />
                 </FormItemWrapper>
                 <FormItemWrapper
-                  className={classNames("__wab_instance", sty.formField__pdRoF)}
+                  className={classNames("__wab_instance", sty.formField__bwd37)}
                   label={"Message"}
                   name={"message"}
                 >
@@ -325,7 +323,7 @@ function PlasmicHomepage__RenderFunc(props: {
                     className={classNames(
                       projectcss.all,
                       projectcss.__wab_text,
-                      sty.text___9BHs6
+                      sty.text__cyeq4
                     )}
                   >
                     {"Button"}
@@ -334,54 +332,10 @@ function PlasmicHomepage__RenderFunc(props: {
               </FormWrapper>
             );
           })()}
-          <RichList
-            data-plasmic-name={"dataList"}
-            data-plasmic-override={overrides.dataList}
-            bordered={true}
-            className={classNames("__wab_instance", sty.dataList)}
-            data={(() => {
-              try {
-                return $queries.query.data.response.data.event.address;
-              } catch (e) {
-                if (
-                  e instanceof TypeError ||
-                  e?.plasmicType === "PlasmicUndefinedDataError"
-                ) {
-                  return undefined;
-                }
-                throw e;
-              }
-            })()}
-            title={[{}]}
-          />
-
           <DataFetcher
-            className={classNames(
-              "__wab_instance",
-              sty.httpRestApiFetcher__pzVuA
-            )}
-            dataName={"fetchedData"}
-            errorDisplay={
-              <DataCtxReader__>{$ctx => "Error fetching data"}</DataCtxReader__>
-            }
-            errorName={"fetchError"}
-            headers={{
-              "Content-Type": "application/json",
-              Accept: "application/json"
-            }}
-            loadingDisplay={
-              <DataCtxReader__>{$ctx => "Loading..."}</DataCtxReader__>
-            }
-            method={"GET"}
-            noLayout={false}
-            url={"https://api.github.com/users/plasmicapp/repos"}
-          />
-
-          <DataFetcher
-            className={classNames(
-              "__wab_instance",
-              sty.httpRestApiFetcher__kJ4Ub
-            )}
+            data-plasmic-name={"httpRestApiFetcher"}
+            data-plasmic-override={overrides.httpRestApiFetcher}
+            className={classNames("__wab_instance", sty.httpRestApiFetcher)}
             dataName={"fetchedData"}
             errorDisplay={
               <DataCtxReader__>{$ctx => "Error fetching data"}</DataCtxReader__>
@@ -402,13 +356,6 @@ function PlasmicHomepage__RenderFunc(props: {
               "http://65.21.139.175/jg.php?get_nodes_by_query=1&active=1&offset=0&count=1&"
             }
           />
-
-          <Fetcher
-            data-plasmic-name={"dataFetcher"}
-            data-plasmic-override={overrides.dataFetcher}
-            className={classNames("__wab_instance", sty.dataFetcher)}
-            queries={$queries}
-          />
         </div>
       </div>
     </React.Fragment>
@@ -424,8 +371,7 @@ const PlasmicDescendants = {
     "input",
     "textArea",
     "button",
-    "dataList",
-    "dataFetcher"
+    "httpRestApiFetcher"
   ],
   section: ["section", "h1"],
   h1: ["h1"],
@@ -433,8 +379,7 @@ const PlasmicDescendants = {
   input: ["input"],
   textArea: ["textArea"],
   button: ["button"],
-  dataList: ["dataList"],
-  dataFetcher: ["dataFetcher"]
+  httpRestApiFetcher: ["httpRestApiFetcher"]
 } as const;
 type NodeNameType = keyof typeof PlasmicDescendants;
 type DescendantsType<T extends NodeNameType> =
@@ -447,8 +392,7 @@ type NodeDefaultElementType = {
   input: typeof AntdInput;
   textArea: typeof AntdTextArea;
   button: typeof AntdButton;
-  dataList: typeof RichList;
-  dataFetcher: typeof Fetcher;
+  httpRestApiFetcher: typeof DataFetcher;
 };
 
 type ReservedPropsType = "variants" | "args" | "overrides";
@@ -517,8 +461,7 @@ export const PlasmicHomepage = Object.assign(
     input: makeNodeComponent("input"),
     textArea: makeNodeComponent("textArea"),
     button: makeNodeComponent("button"),
-    dataList: makeNodeComponent("dataList"),
-    dataFetcher: makeNodeComponent("dataFetcher"),
+    httpRestApiFetcher: makeNodeComponent("httpRestApiFetcher"),
 
     // Metadata about props expected for PlasmicHomepage
     internalVariantProps: PlasmicHomepage__VariantProps,
